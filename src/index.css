@@ -11,13 +11,14 @@
       --color-primary-300: #12b441;
       --color-primary-200: #03290e;
       --color-primary-100: #6f0dff;
-      --color-secondary-700: #d7d7d7;
-      --color-secondary-600: #adadad;
-      --color-secondary-500: #535353;
-      --color-secondary-400: #3c3c3c;
-      --color-secondary-300: #2b2b2b;
-      --color-secondary-200: #7e7e7e;
-      --color-secondary-100: #ececec;
+      --color-secondary-800: #b1b1b1; /*select menu*/
+      --color-secondary-700: #651ac2; /*search icon color*/
+      --color-secondary-600: #202024; /*text black*/
+      --color-secondary-500: #b5b5b5; /*menu text*/
+      --color-secondary-400: #a0a0a0; /*icon*/
+      --color-secondary-300: #fafafa; /*search*/
+      --color-secondary-200: #f9f9f9;
+      --color-secondary-100: #ffffff;
       --color-secondary-0: #000000;
       --color-success: 0, 192, 115;
       --color-warning: 255, 153, 0;
@@ -46,6 +47,10 @@
   font-family: "Vazir";
   /* user-select: none; */
   /* background-color: rgb(var(--background-app-rgb)); */
+}
+
+body {
+  background: #f9f9f9;
 }
 
 @layer components {

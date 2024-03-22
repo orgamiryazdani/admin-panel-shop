@@ -8,6 +8,10 @@ function App() {
         path='/'
         element={<AppLayout />}
       />
+      <Route
+        path='/category'
+        element={<AppLayout />}
+      />
     </Routes>
   );
 }

@@ -1,7 +1,11 @@
+import RightMenu from "./RightMenu";
+
 const MainMenu = () => {
   return (
-    <div>MainMenu</div>
-  )
-}
+    <div>
+      <RightMenu />
+    </div>
+  );
+};
 
-export default MainMenu
+export default MainMenu;
