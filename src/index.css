@@ -50,7 +50,9 @@
 }
 
 body {
-  background: #f9f9f9;
+  width: 100vw;
+  height: 100vh;
+  /* overflow: hidden; */
 }
 
 @layer components {

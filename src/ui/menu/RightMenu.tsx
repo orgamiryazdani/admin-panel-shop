@@ -10,9 +10,11 @@ import { FaUsers } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import { IoAddOutline } from "react-icons/io5";
 import { BsFillBoxSeamFill } from "react-icons/bs";
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { closeMenu, hideMenu, openMenu } from "../../features/menu/menuSlice";
+import { RootState } from "../../app/store";
 
-const menuItems: menuItem = [
+const menuItems: menuItem[] = [
   {
     id: 1,
     title: "محصولات",
@@ -36,7 +38,7 @@ const menuItems: menuItem = [
       {
         id: 1,
         title: "اضافه کردن دسته بندی",
-        path: "/addProduct",
+        path: "/add-category",
         icon: <IoAddOutline />,
       },
     ],
@@ -50,7 +52,7 @@ const menuItems: menuItem = [
       {
         id: 1,
         title: "اضافه کردن کاربر",
-        path: "/addProduct",
+        path: "/user",
         icon: <IoAddOutline />,
       },
     ],
@@ -59,112 +61,140 @@ const menuItems: menuItem = [
 
 const RightMenu = () => {
   const { pathname } = useLocation();
-  const [menu, setMenu] = useState(true);
+
+  const { menuValue, hideMenuValue } = useSelector(
+    (state: RootState) => state.menu,
+  );
+  const dispatch = useDispatch();
+
+  const checkMenuTrue = (item: menuItem) => {
+    if (item.subset?.some((s) => pathname == s.path)) {
+      return true;
+    } else if (item.path == pathname) {
+      return true;
+    }
+  };
 
   return (
-    <div
-      className={`h-full duration-300 ease-in-out ${
-        menu ? "w-full" : "w-28"
-      }`}>
+    <>
       <div
-        className={`flex items-center justify-around w-full h-20 text-secondary-600 ${
-          menu ? "visible" : "hidden"
-        }`}>
+        className={`w-full h-20 flex items-center justify-center absolute top-0 z-10 ${
+          hideMenuValue ? "-left-0" : "-left-14"
+        } ${!menuValue ? "visible" : "hidden"} }`}>
         <div
-          className={`flex items-center font-bold ${
-            menu ? "visible" : "hidden"
-          }`}>
-          <div className='flex items-center text-secondary-100 justify-center w-10 h-10 rounded-xl bg-purple-500 ml-3'>
-            K
-          </div>
-          <p>پنل ادمین</p>
-        </div>
-        <FiMenu
-          className='w-6 h-6 cursor-pointer'
-          onClick={() => setMenu(!menu)}
-        />
-      </div>
-      <div
-        className={`w-full h-20 flex items-center justify-center ${
-          menu ? "hidden" : "visible"
-        }`}>
-        <div className='w-5 h-10 rounded-r-lg cursor-pointer border-r border-t border-b shadow-xl flex items-center justify-center bg-secondary-100'>
+          onClick={() => dispatch(hideMenu())}
+          className='w-5 h-10 rounded-r-lg cursor-pointer shadow-xl flex items-center justify-center bg-secondary-100'>
           <IoMdArrowDropright />
         </div>
         <div
-          onClick={() => setMenu(true)}
-          className='w-5 h-10 rounded-l-lg cursor-pointer border shadow-xl flex items-center justify-center bg-secondary-100'>
+          onClick={() => dispatch(openMenu())}
+          className='w-5 h-10 rounded-l-lg cursor-pointer shadow-xl flex items-center justify-center bg-secondary-100'>
           <IoMdArrowDropleft />
         </div>
       </div>
-      <div className='w-full h-auto flex items-center justify-around flex-col'>
-        {menuItems.map((item) => (
-          <div
-            key={item.id}
-            className='py-6 w-full'>
-            <Link
-              to={item.path}
-              className={`flex items-center w-full h-auto px-5 py-2 ${
-                menu ? "justify-between" : "justify-center"
-              }`}>
-              <div className='flex items-center'>
-                <div
-                  className={`text-secondary-400 text-[22px] ${
-                    menu
-                      ? "ml-4"
-                      : "ml-0 w-10 h-10 rounded-xl bg-secondary-100 flex items-center justify-center shadow-2xl"
-                  }`}>
-                  {item.icon}
-                </div>
-                <span
-                  className={`${menu ? "visible" : "hidden"} ${
-                    pathname == item.path
-                      ? "text-secondary-800 font-bold"
-                      : "text-secondary-500"
-                  }`}>
-                  {item.title}
-                </span>
-              </div>
-              <div
-                className={`duration-200 ease-in-out text-secondary-500 ${
-                  pathname == item.path ? "-rotate-90" : "rotate-0"
-                } ${menu ? "visible" : "hidden"}`}>
-                <IoIosArrowBack />
-              </div>
-            </Link>
-            <div
-              className={`flex flex-col items-center justify-around ${
-                menu ? "visible" : "hidden"
-              } ${
-                pathname == item.path
-                  ? "h-auto overflow-visible"
-                  : "h-0 overflow-hidden"
-              }`}>
-              {item.subset?.map((subset) => (
-                <Link
-                  className='text-xs py-2'
-                  to={subset.path}
-                  key={subset.id}>
-                  <div className='flex items-center'>
-                    <div className='text-secondary-400 text-base ml-1'>
-                      {subset.icon}
-                    </div>
-                    <span
-                      className={
-                        pathname == subset.path
-                          ? "text-secondary-800 font-bold"
-                          : "text-secondary-500"
-                      }>
-                      {subset.title}
-                    </span>
-                  </div>
-                </Link>
-              ))}
+      <div
+        className={`h-full duration-300 ease-in-out relative w-full ${
+          hideMenuValue ? "w-0 hidden" : "w-full"
+        }`}>
+        <div className='flex items-center justify-around w-full h-20 text-secondary-600'>
+          <div className='flex items-center font-bold'>
+            <div className='flex items-center text-secondary-100 justify-center w-10 h-10 rounded-xl bg-purple-500 ml-3'>
+              K
             </div>
+            <p className={`${menuValue ? "visible" : "hidden"}`}>پنل ادمین</p>
           </div>
-        ))}
+          <FiMenu
+            className={`w-6 h-6 cursor-pointer ${
+              menuValue ? "visible" : "hidden"
+            }`}
+            onClick={() => dispatch(closeMenu())}
+          />
+        </div>
+
+        <div className='w-full h-auto flex items-center justify-around flex-col'>
+          {menuItems.map((item) => (
+            <div
+              key={item.id}
+              className='py-6 w-full'>
+              <Link
+                to={item.path}
+                className={`flex items-center w-full h-auto px-5 py-2 ${
+                  menuValue ? "justify-between" : "justify-center"
+                }`}>
+                <div className='flex items-center'>
+                  <div
+                    className={`text-secondary-400 text-[22px] 
+                    ${
+                      item.path == pathname && menuValue == false
+                        ? "bg-secondary-800 !text-secondary-100"
+                        : ""
+                    }
+                    ${
+                      menuValue
+                        ? "ml-4"
+                        : "ml-0 w-12 h-12 rounded-xl bg-secondary-100 z-20 shadow-2xl shadow-gray-500 flex items-center justify-center"
+                    }`}>
+                    {item.icon}
+                  </div>
+                  <span
+                    className={`${menuValue ? "visible" : "hidden"} ${
+                      pathname == item.path
+                        ? "text-secondary-800 font-bold"
+                        : "text-secondary-500"
+                    }`}>
+                    {item.title}
+                  </span>
+                </div>
+                <div
+                  className={`duration-200 ease-in-out text-secondary-500 ${
+                    checkMenuTrue(item) == true ? "-rotate-90" : "rotate-0"
+                  } ${menuValue ? "visible" : "hidden"}`}>
+                  <IoIosArrowBack />
+                </div>
+              </Link>
+              <div
+                className={`flex flex-col items-center justify-around  ${
+                  checkMenuTrue(item) == true
+                    ? "h-auto overflow-visible"
+                    : "h-0 overflow-hidden"
+                } ${menuValue ? "" : "h-auto overflow-visible"}`}>
+                {item.subset?.map((subset) => (
+                  <Link
+                    className='text-xs py-2'
+                    to={subset.path}
+                    key={subset.id}>
+                    <div className='flex items-center'>
+                      <div
+                        className={`text-base ml-1 duration-300 transition-all ease-in-out ${
+                          menuValue
+                            ? "text-secondary-500"
+                            : "w-6 h-6 bg-secondary-300 text-secondary-400 shadow-lg shadow-gray-300 rounded-lg flex items-center justify-center"
+                        } ${
+                          pathname == subset.path && menuValue == false
+                            ? "bg-secondary-400 !text-secondary-100 w-6 h-6 rounded-2xl"
+                            : "text-secondary-400"
+                        }`}>
+                        {subset.icon}
+                      </div>
+                      <span
+                        className={`
+                          ${
+                            pathname == subset.path
+                              ? "text-secondary-800 font-bold"
+                              : "text-secondary-500"
+                          }
+                            ${menuValue ? "visible" : "hidden"}`}>
+                        {subset.title}
+                      </span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
