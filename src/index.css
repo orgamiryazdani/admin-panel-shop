@@ -19,7 +19,6 @@
       --color-secondary-300: #fafafa; /*search*/
       --color-secondary-200: #f9f9f9;
       --color-secondary-100: #ffffff;
-      --color-secondary-0: #000000;
       --color-success: 0, 192, 115;
       --color-warning: 255, 153, 0;
       --color-error: #ff2626;
@@ -40,7 +39,7 @@
 * {
   box-sizing: border-box;
   scroll-behavior: smooth;
-  outline: none;
+  outline: none !important;
   padding: 0;
   margin: 0;
   /* scrollbar-width: none; */

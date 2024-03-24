@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import MainHeader from "./header/MainHeader";
 import MainMenu from "./menu/MainMenu";
 import { useSelector } from "react-redux";
-import { RootState } from "../app/store";
+import { RootState } from "../store";
 
 type Props = {
   children?: ReactNode;

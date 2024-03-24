@@ -12,7 +12,7 @@ import { IoAddOutline } from "react-icons/io5";
 import { BsFillBoxSeamFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { closeMenu, hideMenu, openMenu } from "../../features/menu/menuSlice";
-import { RootState } from "../../app/store";
+import { RootState } from "../../store";
 
 const menuItems: menuItem[] = [
   {
@@ -123,7 +123,7 @@ const RightMenu = () => {
                 }`}>
                 <div className='flex items-center'>
                   <div
-                    className={`text-secondary-400 text-[22px] 
+                    className={`text-secondary-400 transition-all duration-300 ease-in-out text-[22px] 
                     ${
                       item.path == pathname && menuValue == false
                         ? "bg-secondary-800 !text-secondary-100"

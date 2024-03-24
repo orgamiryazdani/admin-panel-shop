@@ -1,7 +1,11 @@
+import TopHeader from "./TopHeader";
+
 const MainHeader = () => {
   return (
-    <div>MainHeader</div>
-  )
-}
+    <div className="w-full h-full">
+      <TopHeader />
+    </div>
+  );
+};
 
-export default MainHeader
+export default MainHeader;
