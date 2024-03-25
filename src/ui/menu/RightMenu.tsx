@@ -11,7 +11,11 @@ import { Link, useLocation } from "react-router-dom";
 import { IoAddOutline } from "react-icons/io5";
 import { BsFillBoxSeamFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
-import { closeMenu, hideMenu, openMenu } from "../../features/menu/menuSlice";
+import {
+  closeMenu,
+  hideMenu,
+  openMenu,
+} from "../../features/menu/menuHeaderSlice";
 import { RootState } from "../../store";
 
 const menuItems: menuItem[] = [
@@ -63,7 +67,7 @@ const RightMenu = () => {
   const { pathname } = useLocation();
 
   const { menuValue, hideMenuValue } = useSelector(
-    (state: RootState) => state.menu,
+    (state: RootState) => state.menuHeader,
   );
   const dispatch = useDispatch();
 

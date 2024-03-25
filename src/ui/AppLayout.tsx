@@ -3,14 +3,15 @@ import MainHeader from "./header/MainHeader";
 import MainMenu from "./menu/MainMenu";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
+import ChangeMenuHeaderUi from "./ChangeMenuHeaderUi";
 
 type Props = {
   children?: ReactNode;
 };
 
 const AppLayout = ({ children }: Props) => {
-  const { menuValue, hideMenuValue } = useSelector(
-    (state: RootState) => state.menu,
+  const { menuValue, hideMenuValue, hideHeader } = useSelector(
+    (state: RootState) => state.menuHeader,
   );
 
   return (
@@ -29,11 +30,20 @@ const AppLayout = ({ children }: Props) => {
             ? "w-[91.7%]"
             : "w-[100%]"
         } `}>
-        <div className={`h-[12%] w-full bg-secondary-100`}>
+        <div
+          className={`w-full bg-secondary-100 transition-all duration-300 ease-in-out ${
+            hideHeader ? "h-0" : "h-[12%]"
+          }`}>
           <MainHeader />
         </div>
-        <div className='h-[88%] w-full bg-secondary-200'>{children}</div>
+        <div
+          className={`w-full bg-secondary-200 transition-all duration-300 ease-in-out ${
+            hideHeader ? "h-[100%]" : "h-[88%]"
+          }`}>
+          {children}
+        </div>
       </div>
+      <ChangeMenuHeaderUi />
     </div>
   );
 };

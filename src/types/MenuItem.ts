@@ -1,14 +1,14 @@
-import { IconType } from "react-icons";
+import { ReactNode } from "react";
 
 export type menuItem = {
     id: number;
     title: string;
-    icon: IconType | any;
+    icon: ReactNode;
     path: string;
     subset?: {
         id: number;
         title: string;
         path: string;
-        icon: IconType | any;
+        icon: ReactNode;
     }[]
 };
