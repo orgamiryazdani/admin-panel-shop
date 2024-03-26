@@ -108,3 +108,113 @@ body {
   animation: settingAnimateHeight 3s ease-in-out infinite;
   -webkit-animation: settingAnimateHeight 3s ease-in-out infinite;
 }
+
+@keyframes menuRightTopRight {
+  0% {
+    top: 0%;
+    right: 0%;
+  }
+  20% {
+    top: 12%;
+    right: 0%;
+  }
+  30% {
+    top: 12%;
+    right: 0%;
+  }
+  40% {
+    top: 12%;
+    right: 20%;
+  }
+  50% {
+    top: 12%;
+    right: 20%;
+  }
+  60% {
+    top: 0%;
+    right: 20%;
+  }
+  80% {
+    height: 100%;
+    right: 20%;
+  }
+  100% {
+    height: 0%;
+    right: 20%;
+    overflow: hidden;
+  }
+}
+
+.menuRightTopRightAnimation {
+  animation: menuRightTopRight 3s ease-in-out forwards;
+  -webkit-animation: menuRightTopRight 3s ease-in-out forwards;
+}
+
+@keyframes topHeader {
+  0% {
+    width: 100%;
+    left: 0%;
+  }
+  50% {
+    width: 100%;
+    left: 20%;
+  }
+  50% {
+    left: 20%;
+    width: 100%;
+  }
+  100% {
+    left: 20%;
+    width: 0%;
+    overflow: hidden;
+  }
+}
+
+.topHeaderAnimation {
+  animation: topHeader 1.5s ease-in-out forwards;
+  -webkit-animation: topHeader 1.5s ease-in-out forwards;
+}
+
+@keyframes showRightMenu {
+  0% {
+    height: 12%;
+    width: 0%;
+    overflow: hidden;
+  }
+  50% {
+    height: 12%;
+    width: 20%;
+    overflow: hidden;
+  }
+  50% {
+    height: 12%;
+    width: 20%;
+    overflow: hidden;
+  }
+  100% {
+    width: 20%;
+    height: 100%;
+    overflow: hidden;
+  }
+}
+
+.showRightMenuAnimate {
+  animation: showRightMenu 1.5s ease-in-out forwards 1.5s;
+  -webkit-animation: showRightMenu 1.5s ease-in-out forwards 1.5s;
+}
+
+@keyframes showTopHeader {
+  0% {
+    width: 0%;
+    height: 12%;
+  }
+  100% {
+    width: 80%;
+    height: 12%;
+  }
+}
+
+.showTopHeaderAnimation {
+  animation: showTopHeader 1.5s ease-in-out forwards 3s;
+  -webkit-animation: showTopHeader 1.5s ease-in-out forwards 3s;
+}
