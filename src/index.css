@@ -111,37 +111,44 @@ body {
 
 @keyframes menuRightTopRight {
   0% {
+    width: 100%;
+    height: 100%;
     top: 0%;
     right: 0%;
   }
   20% {
-    top: 12%;
-    right: 0%;
-  }
-  30% {
+    width: 100%;
+    height: 100%;
     top: 12%;
     right: 0%;
   }
   40% {
+    width: 100%;
+    height: 100%;
     top: 12%;
-    right: 20%;
+    right: 100%;
   }
   50% {
+    width: 100%;
+    height: 100%;
     top: 12%;
-    right: 20%;
+    right: 100%;
   }
   60% {
+    width: 100%;
     top: 0%;
-    right: 20%;
+    right: 100%;
+    height: 100%;
   }
   80% {
-    height: 100%;
-    right: 20%;
+    width: 100%;
+    right: 100%;
+    height: 0%;
   }
   100% {
+    width: 100%;
+    right: 0%;
     height: 0%;
-    right: 20%;
-    overflow: hidden;
   }
 }
 
@@ -154,19 +161,34 @@ body {
   0% {
     width: 100%;
     left: 0%;
+    height: 100%;
+    position: relative;
+    z-index: 100;
   }
   50% {
     width: 100%;
-    left: 20%;
+    left: 25%;
+    height: 100%;
+    position: relative;
+    z-index: 100;
   }
   50% {
-    left: 20%;
+    left: 25%;
     width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 100;
   }
-  100% {
-    left: 20%;
+  90% {
+    left: 25%;
     width: 0%;
     overflow: hidden;
+    height: 100%;
+    position: relative;
+    z-index: 100;
+  }
+  100% {
+    position: absolute;
   }
 }
 
@@ -179,22 +201,21 @@ body {
   0% {
     height: 12%;
     width: 0%;
-    overflow: hidden;
   }
   50% {
     height: 12%;
-    width: 20%;
-    overflow: hidden;
+    width: 100%;
+    overflow: visible;
   }
   50% {
     height: 12%;
-    width: 20%;
-    overflow: hidden;
+    width: 100%;
+    overflow: visible;
   }
   100% {
-    width: 20%;
+    width: 100%;
     height: 100%;
-    overflow: hidden;
+    overflow: visible;
   }
 }
 
@@ -206,15 +227,63 @@ body {
 @keyframes showTopHeader {
   0% {
     width: 0%;
-    height: 12%;
+    height: 100%;
   }
   100% {
-    width: 80%;
-    height: 12%;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
   }
 }
 
 .showTopHeaderAnimation {
   animation: showTopHeader 1.5s ease-in-out forwards 3s;
   -webkit-animation: showTopHeader 1.5s ease-in-out forwards 3s;
+}
+
+@keyframes menuTopRightAnimateTwo {
+  0% {
+    width: 100%;
+    height: 100%;
+    top: 0%;
+    right: 0%;
+  }
+  20% {
+    width: 100%;
+    height: 100%;
+    top: 12%;
+    right: 0%;
+  }
+  40% {
+    width: 100%;
+    height: 100%;
+    top: 12%;
+    right: 100%;
+  }
+  50% {
+    width: 100%;
+    height: 100%;
+    top: 12%;
+    right: 100%;
+  }
+  60% {
+    top: 0%;
+    right: 100%;
+    width: 100%;
+    height: 100%;
+  }
+  80% {
+    right: 100%;
+    height: 0%;
+    width: 100%;
+  }
+  100% {
+    right: 0%;
+    height: 0%;
+  }
+}
+
+.menuTopRightAnimationTwo {
+  animation: menuTopRightAnimateTwo 3s ease-in-out forwards;
+  -webkit-animation: menuTopRightAnimateTwo 3s ease-in-out forwards;
 }

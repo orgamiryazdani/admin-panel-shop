@@ -3,7 +3,10 @@ import { IoIosArrowBack } from "react-icons/io";
 import { IoSettingsOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
-import { hideSetting } from "../features/menu/menuHeaderSlice";
+import {
+  changeUiMenuHeader,
+  hideSetting,
+} from "../features/menu/menuHeaderSlice";
 
 const ChangeMenuHeaderUi = () => {
   const [showItem, setShowItem] = useState(false);
@@ -16,7 +19,10 @@ const ChangeMenuHeaderUi = () => {
         hideSettings ? "p-0" : "p-0"
       }`}>
       <div
-        onClick={() => setShowItem(false)}
+        onClick={() => {
+          setShowItem(false);
+          dispatch(changeUiMenuHeader());
+        }}
         className={`flex items-center justify-center transition-all overflow-hidden duration-200 ease-in-out cursor-pointer
         ${hideSettings ? "w-0" : "w-14"}
         ${showItem ? "h-10 pt-2" : "h-0"}`}>

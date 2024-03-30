@@ -63,7 +63,11 @@ const menuItems: menuItem[] = [
   },
 ];
 
-const RightMenu = () => {
+type props = {
+  showMenuBar: boolean;
+};
+
+const RightMenu = ({ showMenuBar }: props) => {
   const { pathname } = useLocation();
 
   const { menuValue, hideMenuValue } = useSelector(
@@ -81,21 +85,24 @@ const RightMenu = () => {
 
   return (
     <>
-      <div
-        className={`w-full h-20 flex items-center justify-center absolute top-0 z-10 ${
-          hideMenuValue ? "-left-0" : "-left-14"
-        } ${!menuValue ? "visible" : "hidden"} }`}>
+      {showMenuBar ? null : (
         <div
-          onClick={() => dispatch(hideMenu())}
-          className='w-5 h-10 rounded-r-lg cursor-pointer shadow-xl flex items-center justify-center bg-secondary-100'>
-          <IoMdArrowDropright />
+          className={`w-full h-20 flex items-center justify-center absolute top-0 z-10 ${
+            hideMenuValue ? "-left-0" : "-left-14"
+          } ${!menuValue ? "visible" : "hidden"} }`}>
+          <div
+            onClick={() => dispatch(hideMenu())}
+            className='w-5 h-10 rounded-r-lg cursor-pointer shadow-xl flex items-center justify-center bg-secondary-100'>
+            <IoMdArrowDropright />
+          </div>
+          <div
+            onClick={() => dispatch(openMenu())}
+            className='w-5 h-10 rounded-l-lg cursor-pointer shadow-xl flex items-center justify-center bg-secondary-100'>
+            <IoMdArrowDropleft />
+          </div>
         </div>
-        <div
-          onClick={() => dispatch(openMenu())}
-          className='w-5 h-10 rounded-l-lg cursor-pointer shadow-xl flex items-center justify-center bg-secondary-100'>
-          <IoMdArrowDropleft />
-        </div>
-      </div>
+      )}
+
       <div
         className={`h-full duration-300 ease-in-out relative w-full ${
           hideMenuValue ? "w-0 hidden" : "w-full"

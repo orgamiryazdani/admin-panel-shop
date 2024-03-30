@@ -3,26 +3,44 @@ import { RootState } from "../../store";
 import RightMenu from "./RightMenu";
 
 const MainMenu = () => {
-  const { menuValue, hideMenuValue } = useSelector(
-    (state: RootState) => state.menuHeader,
-  );
+  const { menuValue, hideMenuValue, changeMenuHeaderUi, showAnimate } =
+    useSelector((state: RootState) => state.menuHeader);
+
   return (
     <>
       <div
         className={`${menuValue ? "w-[20%]" : "w-[8.3%]"} ${
           hideMenuValue ? "!w-[0%]" : "w-1/5"
-        } relative transition-all duration-300 ease-in-out h-ful bg-secondary-100 shadow-2xl z-10
-         menuRightTopRightAnimation
+        } relative transition-all duration-300 ease-in-out h-ful bg-secondary-100 z-10 
          `}>
-        <RightMenu />
-      </div>
-      <div
-        className={`${menuValue ? "w-[20%]" : "w-[8.3%]"} ${
-          hideMenuValue ? "!w-[0%]" : "w-1/5"
-        } absolute w-0 h-0 overflow-hidden transition-all duration-300 ease-in-out h-ful bg-secondary-100 shadow-2xl z-10
-        showRightMenuAnimate
-         `}>
-        <RightMenu />
+        <div
+          className={`${
+            showAnimate == true ? "w-0 h-0 overflow-hidden" : "w-full h-full"
+          } bg-secondary-100 absolute shadow-2xl
+          ${showAnimate && changeMenuHeaderUi && "menuRightTopRightAnimation"}
+          ${
+            showAnimate && changeMenuHeaderUi == false && "showRightMenuAnimate"
+          }
+          `}>
+          <RightMenu
+            showMenuBar={showAnimate && changeMenuHeaderUi ? true : false}
+          />
+        </div>
+        {/*  */}
+        <div
+          className={`w-0 h-0 overflow-hidden shadow-2xl  bg-secondary-100 absolute
+          ${showAnimate == false && changeMenuHeaderUi && "w-full h-full"}
+          ${showAnimate && changeMenuHeaderUi && "showRightMenuAnimate"}
+          ${
+            showAnimate &&
+            changeMenuHeaderUi == false &&
+            "menuTopRightAnimationTwo"
+          }
+          `}>
+          <RightMenu
+            showMenuBar={showAnimate && changeMenuHeaderUi ? false : true}
+          />
+        </div>
       </div>
     </>
   );
