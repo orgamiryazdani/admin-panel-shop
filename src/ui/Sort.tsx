@@ -1,14 +1,14 @@
 import { FaSortAlphaDown } from "react-icons/fa";
-import { IoIosArrowDown } from "react-icons/io";
+import { IoMdArrowDropdown } from "react-icons/io";
 
 const Sort = () => {
   return (
-    <div className='w-32 h-8 bg-secondary-300 cursor-pointer rounded-md text-secondary-600 text-sm p-2 flex items-center justify-between'>
+    <div className='w-36 h-11 bg-secondary-300 cursor-pointer rounded-3xl text-secondary-600 text-sm px-4 flex items-center justify-between'>
       <div className='flex items-center'>
         <span>سرت</span>
         <FaSortAlphaDown className='mr-2' />
       </div>
-      <IoIosArrowDown />
+      <IoMdArrowDropdown className='text-secondary-700 text-xl' />
     </div>
   );
 };
