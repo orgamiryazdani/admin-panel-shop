@@ -1,7 +1,7 @@
 import { FC } from "react";
 import Search from "../Search";
 import UserInfo from "../UserInfo";
-import { IoIosArrowUp } from "react-icons/io";
+import { IoIosArrowUp, IoIosNotifications } from "react-icons/io";
 import Filter from "../Filter";
 import Sort from "../Sort";
 import Logout from "../Logout";
@@ -19,9 +19,12 @@ const TopHeader: FC = () => {
         hideHeader ? "h-0 -top-10" : "h-full top-0"
       }`}>
       <Search />
+
+      <IoIosNotifications className='text-gray-300 w-7 h-7' />
       <Filter />
       <Sort />
       <UserInfo />
+      <div className='w-[1px] h-10 bg-gray-200'></div>
       <Logout />
       <div
         onClick={() => dispatch(closeHeader())}
