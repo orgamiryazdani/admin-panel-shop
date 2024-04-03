@@ -4,12 +4,13 @@ import DropDown from "./DropDown";
 import { useState } from "react";
 import Slider from "@mui/material/Slider";
 import { useSearchParams } from "react-router-dom";
+import { widthProp } from "../types/WidthProp";
 
 function valuetext(value: number) {
   return `${value}°C`;
 }
 
-const Sort = () => {
+const Sort = ({ width = 36 }: widthProp) => {
   const [showDropDown, setShowDropDown] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const [value, setValue] = useState<number[]>([
@@ -33,7 +34,7 @@ const Sort = () => {
     <div
       onMouseEnter={() => setShowDropDown(true)}
       onMouseLeave={() => setShowDropDown(false)}
-      className='w-36 h-10 bg-secondary-300 relative text-sm cursor-pointer rounded-xl text-secondary-600 px-4 flex items-center justify-between'>
+      className={`w-${width} h-10 bg-secondary-300 relative text-sm cursor-pointer rounded-xl text-secondary-600 px-4 flex items-center justify-between`}>
       <div className='flex items-center font-bold'>
         <span>مرتب سازی</span>
         <FaSortAlphaDown className='mr-2 text-lg' />

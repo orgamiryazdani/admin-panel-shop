@@ -1,7 +1,8 @@
 import { IoSearch } from "react-icons/io5";
 import { useSearchParams } from "react-router-dom";
+import { widthProp } from "../types/WidthProp";
 
-const Search = () => {
+const Search = ({ width = 72 }: widthProp) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentTitle = searchParams.get("title") || "";
 
@@ -19,7 +20,7 @@ const Search = () => {
         onChange={handleChange}
         type='text'
         value={currentTitle}
-        className='w-72 h-11 rounded-l-3xl text-black px-1 bg-secondary-300 placeholder:text-secondary-500'
+        className={`w-${width} h-11 rounded-l-3xl text-black px-1 bg-secondary-300 placeholder:text-secondary-500`}
         placeholder='جستجو...'
       />
     </div>

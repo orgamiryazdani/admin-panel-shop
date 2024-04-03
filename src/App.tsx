@@ -16,7 +16,7 @@ function App() {
             element={<AppLayout />}
           />
           <Route
-            path='/addProduct'
+            path='/add-product'
             element={<AppLayout />}
           />
 

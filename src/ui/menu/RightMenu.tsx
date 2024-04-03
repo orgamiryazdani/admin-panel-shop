@@ -18,7 +18,7 @@ import {
 } from "../../features/menu/menuHeaderSlice";
 import { RootState } from "../../store";
 
-const menuItems: menuItem[] = [
+export const menuItems: menuItem[] = [
   {
     id: 1,
     title: "محصولات",
@@ -28,7 +28,7 @@ const menuItems: menuItem[] = [
       {
         id: 1,
         title: "اضافه کردن محصول",
-        path: "/addProduct",
+        path: "/add-product",
         icon: <IoAddOutline />,
       },
     ],
@@ -102,7 +102,6 @@ const RightMenu = ({ showMenuBar }: props) => {
           </div>
         </div>
       )}
-
       <div
         className={`h-full duration-300 ease-in-out relative w-full ${
           hideMenuValue ? "w-0 hidden" : "w-full"
@@ -121,7 +120,6 @@ const RightMenu = ({ showMenuBar }: props) => {
             onClick={() => dispatch(closeMenu())}
           />
         </div>
-
         <div className='w-full h-auto flex items-center justify-around flex-col'>
           {menuItems.map((item) => (
             <div

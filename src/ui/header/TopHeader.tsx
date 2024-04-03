@@ -19,7 +19,6 @@ const TopHeader: FC = () => {
         hideHeader ? "h-0 -top-10" : "h-full top-0"
       }`}>
       <Search />
-
       <IoIosNotifications className='text-gray-300 w-7 h-7' />
       <Filter />
       <Sort />

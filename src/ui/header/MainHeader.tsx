@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import TopHeader from "./TopHeader";
+import RightHeader from "./RightHeader";
 
 const MainHeader = () => {
   const { hideHeader, changeMenuHeaderUi, showAnimate } = useSelector(
@@ -19,25 +20,25 @@ const MainHeader = () => {
           } bg-secondary-100 absolute
           ${showAnimate && changeMenuHeaderUi && "topHeaderAnimation"}
           ${
-            showAnimate && changeMenuHeaderUi == false && "showTopHeaderAnimation"
+            showAnimate &&
+            changeMenuHeaderUi == false &&
+            "showTopHeaderAnimation"
           }
           `}>
-          <TopHeader
-          />
+          <TopHeader />
         </div>
         {/*  */}
         <div
           className={`w-0 h-0 overflow-hidden bg-secondary-100 absolute
-          ${showAnimate == false && changeMenuHeaderUi && "w-full h-full overflow-visible"}
-          ${showAnimate && changeMenuHeaderUi && "showTopHeaderAnimation"}
           ${
-            showAnimate &&
-            changeMenuHeaderUi == false &&
-            "topHeaderAnimation"
+            showAnimate == false &&
+            changeMenuHeaderUi &&
+            "w-full h-full overflow-visible"
           }
+          ${showAnimate && changeMenuHeaderUi && "showTopHeaderAnimation"}
+          ${showAnimate && changeMenuHeaderUi == false && "topHeaderAnimation"}
           `}>
-          <TopHeader
-          />
+          <RightHeader />
         </div>
       </div>
     </>
@@ -45,6 +46,3 @@ const MainHeader = () => {
 };
 
 export default MainHeader;
-
-
-

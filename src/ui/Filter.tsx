@@ -6,8 +6,9 @@ import useCategories from "../hooks/useCategories";
 import { category } from "../types/Category";
 import Loading from "./Loading";
 import { useSearchParams } from "react-router-dom";
+import { widthProp } from "../types/WidthProp";
 
-const Filter = () => {
+const Filter = ({ width = 36 }: widthProp) => {
   const [showDropDown, setShowDropDown] = useState(false);
   const { data, isLoading } = useCategories();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -22,7 +23,7 @@ const Filter = () => {
     <div
       onMouseEnter={() => setShowDropDown(true)}
       onMouseLeave={() => setShowDropDown(false)}
-      className='w-36 h-10 relative bg-secondary-300 text-sm cursor-pointer px-4 rounded-xl text-secondary-600 flex items-center justify-between'>
+      className={`w-${width} h-10 relative bg-secondary-300 text-sm cursor-pointer px-4 rounded-xl text-secondary-600 flex items-center justify-between`}>
       <div className='flex items-center font-bold'>
         <span>فیلتر</span>
         <VscSettings className='mr-2 text-lg' />

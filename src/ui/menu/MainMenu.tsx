@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import RightMenu from "./RightMenu";
+import TopMenu from "./TopMenu";
 
 const MainMenu = () => {
   const { menuValue, hideMenuValue, changeMenuHeaderUi, showAnimate } =
@@ -28,7 +29,7 @@ const MainMenu = () => {
         </div>
         {/*  */}
         <div
-          className={`w-0 h-0 overflow-hidden shadow-2xl  bg-secondary-100 absolute
+          className={`w-0 h-0 overflow-hidden shadow-2xl bg-secondary-100 absolute
           ${showAnimate == false && changeMenuHeaderUi && "w-full h-full"}
           ${showAnimate && changeMenuHeaderUi && "showRightMenuAnimate"}
           ${
@@ -37,7 +38,7 @@ const MainMenu = () => {
             "menuTopRightAnimationTwo"
           }
           `}>
-          <RightMenu
+          <TopMenu
             showMenuBar={showAnimate && changeMenuHeaderUi ? false : true}
           />
         </div>
