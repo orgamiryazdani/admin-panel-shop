@@ -10,7 +10,7 @@ const MainHeader = () => {
   return (
     <>
       <div
-        className={`w-full bg-secondary-100 transition-all relative duration-300 ease-in-out ${
+        className={`w-full bg-secondary-300 transition-all relative duration-300 ease-in-out ${
           hideHeader ? "h-0" : "h-[12%]"
         }`}>
         <div
@@ -28,7 +28,7 @@ const MainHeader = () => {
         {/*  */}
         <div
           className={`w-0 h-0 overflow-hidden bg-secondary-100 absolute
-          ${showAnimate == false && changeMenuHeaderUi && "w-full h-full"}
+          ${showAnimate == false && changeMenuHeaderUi && "w-full h-full overflow-visible"}
           ${showAnimate && changeMenuHeaderUi && "showTopHeaderAnimation"}
           ${
             showAnimate &&
@@ -40,7 +40,6 @@ const MainHeader = () => {
           />
         </div>
       </div>
-      {/*  */}
     </>
   );
 };

@@ -12,10 +12,9 @@ const Filter = () => {
   const { data, isLoading } = useCategories();
   const [searchParams, setSearchParams] = useSearchParams();
   const currentFilter = searchParams.get("categoryId") || "";
-  console.log(currentFilter);
 
   function handleClick(id: number) {
-    searchParams.set("categoryId", id);
+    searchParams.set("categoryId", id.toString());
     setSearchParams(searchParams);
   }
 
@@ -42,7 +41,9 @@ const Filter = () => {
             ) : (
               data?.map((item: category) => (
                 <span
-                  className='mt-1 hover:bg-secondary-500 p-1 rounded'
+                  className={`mt-1 hover:bg-secondary-500 p-1 rounded ${
+                    parseInt(currentFilter) == item.id ? "bg-secondary-500" : ""
+                  }`}
                   key={item.id}
                   onClick={() => handleClick(item.id)}>
                   {item.name}

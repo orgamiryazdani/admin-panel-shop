@@ -11,7 +11,7 @@ const MainMenu = () => {
       <div
         className={`${menuValue ? "w-[20%]" : "w-[8.3%]"} ${
           hideMenuValue ? "!w-[0%]" : "w-1/5"
-        } relative transition-all duration-300 ease-in-out h-ful bg-secondary-100 z-10 
+        } relative transition-all duration-300 ease-in-out h-ful bg-secondary-300 z-10 
          `}>
         <div
           className={`${
