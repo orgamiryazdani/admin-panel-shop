@@ -6,9 +6,11 @@ import useCategories from "../hooks/useCategories";
 import { category } from "../types/Category";
 import Loading from "./Loading";
 import { useSearchParams } from "react-router-dom";
-import { widthProp } from "../types/WidthProp";
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
 
-const Filter = ({ width = 36 }: widthProp) => {
+const Filter = () => {
+  const { menuValue } = useSelector((state: RootState) => state.menuHeader);
   const [showDropDown, setShowDropDown] = useState(false);
   const { data, isLoading } = useCategories();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -23,12 +25,18 @@ const Filter = ({ width = 36 }: widthProp) => {
     <div
       onMouseEnter={() => setShowDropDown(true)}
       onMouseLeave={() => setShowDropDown(false)}
-      className={`w-${width} h-10 relative bg-secondary-300 text-sm cursor-pointer px-4 rounded-xl text-secondary-600 flex items-center justify-between`}>
+      className={`${
+        menuValue == false ? "w-24 text-xs px-2" : "w-56 px-4"
+      } h-10 relative bg-secondary-300 cursor-pointer rounded-xl text-secondary-600 flex items-center justify-between`}>
       <div className='flex items-center font-bold'>
         <span>فیلتر</span>
-        <VscSettings className='mr-2 text-lg' />
+        <VscSettings className='mr-2' />
       </div>
-      <IoMdArrowDropdown className='text-xl' />
+      <IoMdArrowDropdown
+        className={
+          menuValue == false ? "text-xs rotate-90" : "text-xl rotate-0"
+        }
+      />
       <DropDown show={showDropDown}>
         <div className='w-full h-full p-3'>
           <p className='border-b bottom-1 w-full'>دسته بندی</p>

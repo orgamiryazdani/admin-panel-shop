@@ -1,6 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
-import { hideMenu, openMenu } from "../../features/menu/menuHeaderSlice";
+import {
+  closeMenu,
+  hideMenu,
+  openMenu,
+} from "../../features/menu/menuHeaderSlice";
 import {
   IoIosNotifications,
   IoMdArrowDropleft,
@@ -57,19 +61,30 @@ const TopMenu = ({ showMenuBar }: props) => {
             className={`w-6 h-6 cursor-pointer ${
               menuValue ? "visible" : "hidden"
             }`}
-            onClick={() => dispatch(hideMenu())}
+            onClick={() => dispatch(closeMenu())}
           />
         </div>
         <div className='w-full overflow-hidden h-[88%] flex items-center justify-around flex-col'>
-          <Search width={52} />
-          <Filter width={56} />
-          <Sort width={56} />
-          <UserInfo width={64}/>
-          <div className='flex items-center justify-around w-full'>
-            <div className='w-14 h-14 rounded-xl cursor-pointer bg-gray-200 flex items-center justify-center'>
-              <IoIosNotifications className='text-gray-400 w-7 h-7' />
+          <Search />
+          <Filter />
+          <Sort />
+          <UserInfo />
+          <div
+            className={`flex items-center justify-around w-full ${
+              menuValue ? "flex-row" : "flex-col h-32"
+            }`}>
+            <div
+              className={`${
+                menuValue ? "w-14 h-14" : "w-12 h-12"
+              } rounded-xl cursor-pointer bg-gray-200 flex items-center justify-center`}>
+              <IoIosNotifications
+                className={`text-gray-400 ${menuValue ? "w-7 h-7" : "w-6 h-6"}`}
+              />
             </div>
-            <div className='w-14 h-14 hover:text-red-500 cursor-pointer rounded-xl bg-gray-200 flex items-center justify-center'>
+            <div
+              className={`
+            ${menuValue ? "w-14 h-14" : "w-12 h-12"}
+            hover:text-red-500 cursor-pointer rounded-xl bg-gray-200 flex items-center justify-center`}>
               <Logout />
             </div>
           </div>

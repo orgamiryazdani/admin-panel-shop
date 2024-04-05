@@ -4,13 +4,17 @@ import DropDown from "./DropDown";
 import { useState } from "react";
 import Slider from "@mui/material/Slider";
 import { useSearchParams } from "react-router-dom";
-import { widthProp } from "../types/WidthProp";
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
 
 function valuetext(value: number) {
   return `${value}°C`;
 }
 
-const Sort = ({ width = 36 }: widthProp) => {
+const Sort = () => {
+  const { menuValue } = useSelector(
+    (state: RootState) => state.menuHeader,
+  );
   const [showDropDown, setShowDropDown] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const [value, setValue] = useState<number[]>([
@@ -34,12 +38,18 @@ const Sort = ({ width = 36 }: widthProp) => {
     <div
       onMouseEnter={() => setShowDropDown(true)}
       onMouseLeave={() => setShowDropDown(false)}
-      className={`w-${width} h-10 bg-secondary-300 relative text-sm cursor-pointer rounded-xl text-secondary-600 px-4 flex items-center justify-between`}>
+      className={`${
+        menuValue == false ? "w-24 text-[10px] px-2" : "w-56 px-4"
+      } h-10 bg-secondary-300 relative cursor-pointer rounded-xl text-secondary-600 flex items-center justify-between`}>
       <div className='flex items-center font-bold'>
         <span>مرتب سازی</span>
-        <FaSortAlphaDown className='mr-2 text-lg' />
+        <FaSortAlphaDown className='mr-2' />
       </div>
-      <IoMdArrowDropdown className='text-xl' />
+      <IoMdArrowDropdown
+        className={
+          menuValue == false ? "text-xs rotate-90" : "text-xl rotate-0"
+        }
+      />
       <DropDown show={showDropDown}>
         <div className='w-full h-full p-5'>
           <div className='flex items-center justify-between'>
