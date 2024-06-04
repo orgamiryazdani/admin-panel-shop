@@ -87,7 +87,7 @@ const RightMenu = ({ showMenuBar }: props) => {
     <>
       {showMenuBar ? null : (
         <div
-          className={`w-full h-20 flex items-center justify-center absolute top-0 z-10 ${
+          className={`w-full h-20 flex items-center justify-center absolute top-0 z-50 ${
             hideMenuValue ? "-left-0" : "-left-14"
           } ${!menuValue ? "visible" : "hidden"} }`}>
           <div
@@ -103,7 +103,7 @@ const RightMenu = ({ showMenuBar }: props) => {
         </div>
       )}
       <div
-        className={`h-full duration-300 ease-in-out relative w-full ${
+        className={`h-full duration-300 ease-in-out relative w-full overflow-hidden z-10 ${
           hideMenuValue ? "w-0 hidden" : "w-full"
         }`}>
         <div className='flex items-center justify-around w-full h-20 text-secondary-600'>

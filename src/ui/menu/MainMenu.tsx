@@ -30,7 +30,7 @@ const MainMenu = () => {
         {/*  */}
         <div
           className={`w-0 h-0 overflow-hidden shadow-2xl bg-secondary-100 absolute
-          ${showAnimate == false && changeMenuHeaderUi && "w-full h-full"}
+          ${showAnimate == false && changeMenuHeaderUi && "w-full h-full overflow-visible"}
           ${showAnimate && changeMenuHeaderUi && "showRightMenuAnimate"}
           ${
             showAnimate &&

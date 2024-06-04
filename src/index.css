@@ -201,15 +201,19 @@ body {
   0% {
     height: 12%;
     width: 0%;
+    overflow: hidden;
   }
   50% {
     height: 12%;
     width: 100%;
-    overflow: visible;
+    overflow: hidden;
   }
   50% {
     height: 12%;
     width: 100%;
+    overflow: hidden;
+  }
+  60% {
     overflow: visible;
   }
   100% {
