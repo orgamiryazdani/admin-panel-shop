@@ -8,7 +8,7 @@ const UserInfo = () => {
     <>
       <img
         className='w-12 h-12 object-cover overflow-hidden rounded-xl'
-        src='https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?cs=srgb&dl=pexels-simon-robben-614810.jpg&fm=jpg'
+        src='https://assets-global.website-files.com/62d84e447b4f9e7263d31e94/6399a4d27711a5ad2c9bf5cd_ben-sweet-2LowviVHZ-E-unsplash-1.jpeg'
         alt='user profile image'
       />
       <div

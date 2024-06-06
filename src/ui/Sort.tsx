@@ -10,7 +10,6 @@ function valuetext(value: number) {
 }
 
 const Sort = () => {
-  
   const [showDropDown, setShowDropDown] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const [value, setValue] = useState<number[]>([

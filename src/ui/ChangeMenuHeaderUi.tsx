@@ -43,7 +43,7 @@ const ChangeMenuHeaderUi = () => {
       </div>
       <div
         onClick={() => dispatch(hideSetting())}
-        className={`absolute z-10 top-3 text-sm transition-all duration-300 ease-in-out bg-secondary-100 cursor-pointer rounded-l-3xl w-5 h-8 flex items-center justify-end text-secondary-600 ${
+        className={`absolute top-3 text-sm transition-all duration-300 ease-in-out bg-secondary-100 cursor-pointer rounded-l-3xl w-5 h-8 flex items-center justify-end text-secondary-600 ${
           hideSettings ? "rotate-180 -left-5 shadow-xl" : "-left-3"
         }`}>
         <IoIosArrowBack />

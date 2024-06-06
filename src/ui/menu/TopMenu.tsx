@@ -20,10 +20,19 @@ import { FaSortAlphaDown } from "react-icons/fa";
 import { VscSettings } from "react-icons/vsc";
 import { IoSearch } from "react-icons/io5";
 import { useEffect, useState } from "react";
+import Modal from "../Modal";
+import useCategories from "../../hooks/useCategories";
+import { useSearchParams } from "react-router-dom";
+import { Slider } from "@mui/material";
+import Loading from "../Loading";
 
 type props = {
   showMenuBar: boolean;
 };
+
+function valuetext(value: number) {
+  return `${value}°C`;
+}
 
 const TopMenu = ({ showMenuBar }: props) => {
   const { menuValue, hideMenuValue, changeMenuHeaderUi } = useSelector(
@@ -31,6 +40,33 @@ const TopMenu = ({ showMenuBar }: props) => {
   );
   const dispatch = useDispatch();
   const [showSearch, setShowSearch] = useState(false);
+  const [showModalFilter, setShowModalFilter] = useState(false);
+  const [showModalSort, setShowModalSort] = useState(false);
+
+  const { data, isLoading } = useCategories();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const [value, setValue] = useState<number[]>([
+    Number(searchParams.get("price_min")) || 0,
+    Number(searchParams.get("price_max")) || 1000,
+  ]);
+
+  const handleChange = (event: Event, newValue: number | number[]) => {
+    setValue(Array.isArray(newValue) ? newValue : [newValue]);
+    if (Array.isArray(newValue)) {
+      searchParams.set("price_min", newValue[0].toString());
+      searchParams.set("price_max", newValue[1].toString());
+    } else {
+      searchParams.set("price_min", newValue.toString());
+      searchParams.set("price_max", newValue.toString());
+    }
+    setSearchParams(searchParams);
+  };
+
+  function filterHandler(id: number) {
+    searchParams.set("categoryId", id.toString());
+    setSearchParams(searchParams);
+  }
 
   useEffect(() => {
     if (changeMenuHeaderUi == false) {
@@ -40,9 +76,58 @@ const TopMenu = ({ showMenuBar }: props) => {
 
   return (
     <>
+      {/* sort modal */}
+      <Modal
+        open={showModalSort}
+        onClose={() => setShowModalSort(false)}
+        title='سرت بر اساس قیمت'>
+        <div className='w-full flex items-center justify-between px-1'>
+          <span>بیشترین</span>
+          <span>
+            شروع قیمت از {value[0]} تا {value[1]}
+          </span>
+          <span>کمترین</span>
+        </div>
+        <div className='px-3'>
+          <Slider
+            getAriaLabel={() => "Temperature range"}
+            value={value}
+            onChange={handleChange}
+            valueLabelDisplay='auto'
+            getAriaValueText={valuetext}
+            min={1}
+            max={1000}
+          />
+        </div>
+      </Modal>
+      {/* filter modal */}
+      <Modal
+        open={showModalFilter}
+        onClose={() => setShowModalFilter(false)}
+        title='فیلتر بر اساس دسته بندی'>
+        <select
+          className='w-full h-11 rounded-xl px-2'
+          name=''
+          id=''
+          onChange={(e) => filterHandler(Number(e.target.value))}>
+          <option value=''>همه محصولات</option>
+          {isLoading ? (
+            <Loading />
+          ) : (
+            data?.map((item) => (
+              <option
+                key={item.id}
+                value={item.id}>
+                {item.name}
+              </option>
+            ))
+          )}
+        </select>
+      </Modal>
+
       {showMenuBar ? null : (
         <div
-          className={`w-full h-20 flex items-center justify-center absolute top-0 z-50 ${
+          className={`w-full h-20 flex items-center justify-center absolute top-0 z-40 ${
             hideMenuValue ? "-left-0" : "-left-14"
           } ${!menuValue ? "visible" : "hidden"} }`}>
           <div
@@ -91,12 +176,16 @@ const TopMenu = ({ showMenuBar }: props) => {
             </>
           ) : (
             <>
+              {/* search */}
               <div
-                onClick={() => setShowSearch(!showSearch)}
-                className={`flex items-center justify-start relative text-gray-500 bg-white shadow-2xl shadow-gray-600 cursor-pointer w-12 pr-3 h-10 text-xl ${
+                className={`flex items-center justify-start relative text-gray-500 bg-white shadow-2xl shadow-gray-600 cursor-pointer w-12 h-10 text-xl ${
                   !showSearch ? "rounded-xl" : "rounded-r-xl"
                 }`}>
-                <IoSearch />
+                <div
+                  className='w-full h-full flex items-center justify-center'
+                  onClick={() => setShowSearch(!showSearch)}>
+                  <IoSearch />
+                </div>
                 <input
                   type='search'
                   placeholder='جستجو...'
@@ -107,10 +196,16 @@ const TopMenu = ({ showMenuBar }: props) => {
                 `}
                 />
               </div>
-              <div className='w-12 h-12 bg-secondary-100 text-gray-500 text-2xl shadow-2xl shadow-gray-600 flex items-center justify-center rounded-xl cursor-pointer'>
+              {/* filter category */}
+              <div
+                onClick={() => setShowModalFilter(true)}
+                className='w-12 h-12 bg-secondary-100 text-gray-500 text-2xl shadow-2xl shadow-gray-600 flex items-center justify-center rounded-xl cursor-pointer'>
                 <VscSettings />
               </div>
-              <div className='w-12 h-12 bg-secondary-100 text-gray-500 text-xl shadow-2xl shadow-gray-600 flex items-center justify-center rounded-xl cursor-pointer'>
+              {/* sort price */}
+              <div
+                onClick={() => setShowModalSort(true)}
+                className='w-12 h-12 bg-secondary-100 text-gray-500 text-xl shadow-2xl shadow-gray-600 flex items-center justify-center rounded-xl cursor-pointer'>
                 <FaSortAlphaDown />
               </div>
             </>

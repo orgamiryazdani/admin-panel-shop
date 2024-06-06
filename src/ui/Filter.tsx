@@ -13,7 +13,7 @@ const Filter = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentFilter = searchParams.get("categoryId") || "";
 
-  function handleClick(id: number) {
+  function filterHandler(id: number) {
     searchParams.set("categoryId", id.toString());
     setSearchParams(searchParams);
   }
@@ -45,7 +45,7 @@ const Filter = () => {
                     parseInt(currentFilter) == item.id ? "bg-secondary-500" : ""
                   }`}
                   key={item.id}
-                  onClick={() => handleClick(item.id)}>
+                  onClick={() => filterHandler(item.id)}>
                   {item.name}
                 </span>
               ))
