@@ -18,14 +18,14 @@ const TopHeader: FC = () => {
       className={`flex items-center justify-between w-full px-10 relative transition-all duration-300 ease-in-out ${
         hideHeader ? "h-0 -top-10" : "h-full top-0"
       }`}>
-      <div className='w-[340px]'>
+      <div className='xl:w-[340px] lg:w-60'>
         <Search />
       </div>
       <IoIosNotifications className='text-gray-300 w-7 h-7' />
-      <div className='w-40'>
+      <div className='xl:w-40 lg:w-28'>
         <Filter />
       </div>
-      <div className='w-40'>
+      <div className='xl:w-40 lg:w-28'>
         <Sort />
       </div>
       <UserInfo />

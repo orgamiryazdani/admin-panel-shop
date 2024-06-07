@@ -11,8 +11,8 @@ const MainHeader = () => {
   return (
     <>
       <div
-        className={`w-full bg-secondary-300 transition-all relative duration-300 ease-in-out ${
-          hideHeader ? "h-0" : "h-[12%]"
+        className={`w-full bg-secondary-300 !min-w-96 transition-all relative duration-300 ease-in-out ${
+          hideHeader ? "h-0" : "min-h-[75px]"
         }`}>
         <div
           className={`${

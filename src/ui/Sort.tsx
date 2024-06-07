@@ -34,11 +34,11 @@ const Sort = () => {
       onMouseEnter={() => setShowDropDown(true)}
       onMouseLeave={() => setShowDropDown(false)}
       className='w-full h-10 bg-secondary-300 relative text-sm px-4 cursor-pointer rounded-xl text-secondary-600 flex items-center justify-between'>
-      <div className='flex items-center font-bold'>
+      <div className='flex items-center font-bold lg:text-[10px] xl:text-base'>
         <span>مرتب سازی</span>
         <FaSortAlphaDown className='mr-2' />
       </div>
-      <IoMdArrowDropdown className="text-xl rotate-0" />
+      <IoMdArrowDropdown className="lg:text-xs xl:text-xl rotate-0" />
       <DropDown show={showDropDown}>
         <div className='w-full h-full p-5'>
           <div className='flex items-center justify-between'>

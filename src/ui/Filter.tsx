@@ -23,11 +23,11 @@ const Filter = () => {
       onMouseEnter={() => setShowDropDown(true)}
       onMouseLeave={() => setShowDropDown(false)}
       className='w-full h-10 px-4 relative bg-secondary-300 cursor-pointer rounded-xl text-secondary-600 flex items-center justify-between'>
-      <div className='flex items-center font-bold'>
+      <div className='flex items-center font-bold lg:text-xs xl:text-base'>
         <span>فیلتر</span>
         <VscSettings className='mr-2' />
       </div>
-      <IoMdArrowDropdown className='text-xl rotate-0' />
+      <IoMdArrowDropdown className='lg:text-xs xl:text-xl rotate-0' />
       <DropDown show={showDropDown}>
         <div className='w-full h-full p-3'>
           <p className='border-b bottom-1 w-full'>دسته بندی</p>

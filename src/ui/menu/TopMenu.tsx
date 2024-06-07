@@ -124,7 +124,6 @@ const TopMenu = ({ showMenuBar }: props) => {
           )}
         </select>
       </Modal>
-
       {showMenuBar ? null : (
         <div
           className={`w-full h-20 flex items-center justify-center absolute top-0 z-40 ${
@@ -143,7 +142,7 @@ const TopMenu = ({ showMenuBar }: props) => {
         </div>
       )}
       <div
-        className={`h-full duration-300 ease-in-out relative w-full z-10 ${
+        className={`h-full duration-300 ease-in-out min-w-[98px] relative w-full z-10 ${
           hideMenuValue ? "w-0 hidden" : "w-full"
         }`}>
         <div className='flex items-center justify-around bg-white w-full h-[12%] text-secondary-600'>
@@ -164,13 +163,13 @@ const TopMenu = ({ showMenuBar }: props) => {
         <div className='w-full h-[88%] flex items-center justify-around flex-col bg-white'>
           {menuValue ? (
             <>
-              <div className='w-56'>
+              <div className='xl:w-56 lg:w-44'>
                 <Search />
               </div>
-              <div className='w-56'>
+              <div className='xl:w-56 lg:w-44'>
                 <Filter />
               </div>
-              <div className='w-56'>
+              <div className='xl:w-56 lg:w-44'>
                 <Sort />
               </div>
             </>

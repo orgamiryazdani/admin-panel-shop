@@ -16,7 +16,7 @@ const MainMenu = () => {
          `}>
         <div
           className={`${
-            showAnimate == true ? "w-0 h-0 overflow-hidden" : "w-full h-full"
+            showAnimate == true ? "w-0 h-0 overflow-hidden" : "w-full h-full min-w-[110px]"
           } bg-secondary-100 absolute shadow-2xl
           ${showAnimate && changeMenuHeaderUi && "menuRightTopRightAnimation"}
           ${
