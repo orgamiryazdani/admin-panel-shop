@@ -142,7 +142,7 @@ const TopMenu = ({ showMenuBar }: props) => {
         </div>
       )}
       <div
-        className={`h-full duration-300 ease-in-out min-w-[98px] relative w-full z-10 ${
+        className={`h-full duration-300 ease-in-out relative w-full z-10 ${
           hideMenuValue ? "w-0 hidden" : "w-full"
         }`}>
         <div className='flex items-center justify-around bg-white w-full h-[12%] text-secondary-600'>

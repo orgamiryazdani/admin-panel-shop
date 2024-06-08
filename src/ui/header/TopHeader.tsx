@@ -15,7 +15,7 @@ const TopHeader: FC = () => {
 
   return (
     <div
-      className={`flex items-center justify-between w-full px-10 relative transition-all duration-300 ease-in-out ${
+      className={`flex items-center pr-12 justify-between w-full px-10 relative transition-all duration-300 ease-in-out ${
         hideHeader ? "h-0 -top-10" : "h-full top-0"
       }`}>
       <div className='xl:w-[340px] lg:w-60'>

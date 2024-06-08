@@ -15,7 +15,7 @@ const ChangeMenuHeaderUi = () => {
 
   return (
     <div
-      className={`absolute left-5 top-1/2 shadow-xl text-xl rounded-xl bg-secondary-100 text-secondary-600 ${
+      className={`absolute hidden lg:block left-5 top-1/2 shadow-xl text-xl rounded-xl bg-secondary-100 text-secondary-600 ${
         hideSettings ? "p-0" : "p-0"
       }`}>
       <div

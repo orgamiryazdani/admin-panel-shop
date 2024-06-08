@@ -12,12 +12,12 @@ const MainMenu = () => {
       <div
         className={`${menuValue ? "w-[20%]" : "w-[8.3%]"} ${
           hideMenuValue ? "!w-[0%]" : "w-1/5"
-        } relative transition-all duration-300 ease-in-out h-ful bg-secondary-300 z-10 
+        } hidden lg:flex relative transition-all duration-300 ease-in-out h-ful bg-secondary-300 z-10 
          `}>
         <div
           className={`${
-            showAnimate == true ? "w-0 h-0 overflow-hidden" : "w-full h-full min-w-[110px]"
-          } bg-secondary-100 absolute shadow-2xl
+            showAnimate == true ? "w-0 h-0 overflow-hidden" : "w-full h-full"
+          } bg-secondary-100 absolute shadow-2xl min-w-[110px]
           ${showAnimate && changeMenuHeaderUi && "menuRightTopRightAnimation"}
           ${
             showAnimate && changeMenuHeaderUi == false && "showRightMenuAnimate"
@@ -29,7 +29,7 @@ const MainMenu = () => {
         </div>
         {/*  */}
         <div
-          className={`w-0 h-0 overflow-hidden shadow-2xl bg-secondary-100 absolute
+          className={`w-0 h-0 overflow-hidden shadow-2xl bg-secondary-100 absolute min-w-[110px]
           ${showAnimate == false && changeMenuHeaderUi && "w-full h-full overflow-visible"}
           ${showAnimate && changeMenuHeaderUi && "showRightMenuAnimate"}
           ${
