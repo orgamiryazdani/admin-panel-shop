@@ -28,6 +28,7 @@ const Filter = () => {
         <VscSettings className='mr-2' />
       </div>
       <IoMdArrowDropdown className='lg:text-xs xl:text-xl rotate-0' />
+      {/* drop down */}
       <DropDown show={showDropDown}>
         <div className='w-full h-full p-3'>
           <p className='border-b bottom-1 w-full'>دسته بندی</p>

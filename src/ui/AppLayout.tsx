@@ -4,6 +4,8 @@ import MainMenu from "./menu/MainMenu";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import ChangeMenuHeaderUi from "./ChangeMenuHeaderUi";
+import HeaderMobile from "./mobile size menu header/HeaderMobile";
+import MenuMobile from "./mobile size menu header/MenuMobile";
 
 type Props = {
   children?: ReactNode;
@@ -16,7 +18,9 @@ const AppLayout = ({ children }: Props) => {
 
   return (
     <div className='flex flex-row h-screen max-w-[1400px]'>
-        <MainMenu />
+      {/* menu */}
+      <MainMenu />
+      <MenuMobile />
       <div
         className={`flex flex-col transition-all duration-300 ease-in-out ${
           menuValue
@@ -25,9 +29,12 @@ const AppLayout = ({ children }: Props) => {
             ? "w-[91.7%]"
             : "w-[100%]"
         } `}>
-          <MainHeader />
+        {/* header */}
+        <MainHeader />
+        <HeaderMobile />
+        {/* children */}
         <div
-          className={`w-full bg-secondary-200 transition-all duration-300 ease-in-out ${
+          className={`lg:w-full w-screen bg-secondary-200 transition-all duration-300 ease-in-out ${
             hideHeader ? "h-[100%]" : "h-[88%]"
           }`}>
           {children}
