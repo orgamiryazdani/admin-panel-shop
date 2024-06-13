@@ -7,6 +7,7 @@ export interface CounterState {
   hideHeader: boolean;
   changeMenuHeaderUi: boolean;
   showAnimate: boolean;
+  menuMobileValue: boolean;
 }
 
 const initialState: CounterState = {
@@ -15,7 +16,8 @@ const initialState: CounterState = {
   hideSettings: localStorage.getItem("hideSetting") === "true" || false,
   hideHeader: localStorage.getItem("hideHeader") === "true" || false,
   changeMenuHeaderUi: localStorage.getItem("menuHeader") === "true" || false,
-  showAnimate: false
+  showAnimate: false,
+  menuMobileValue: false
 }
 
 export const menuSlice = createSlice({
@@ -58,9 +60,12 @@ export const menuSlice = createSlice({
       localStorage.setItem("hideHeader", false.toString());
       localStorage.setItem("hideMenu", false.toString());
     },
+    openMenuMobile: (state) => {
+      state.menuMobileValue = true;
+    }
   },
 })
 
-export const { openMenu, closeMenu, hideMenu, hideSetting, closeHeader, changeUiMenuHeader } = menuSlice.actions
+export const { openMenu, closeMenu, hideMenu, hideSetting, closeHeader, changeUiMenuHeader, openMenuMobile } = menuSlice.actions
 
 export default menuSlice.reducer
