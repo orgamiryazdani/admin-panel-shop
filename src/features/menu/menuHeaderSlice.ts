@@ -61,7 +61,8 @@ export const menuSlice = createSlice({
       localStorage.setItem("hideMenu", false.toString());
     },
     openMenuMobile: (state) => {
-      state.menuMobileValue = true;
+      const value = !state.menuMobileValue;
+      state.menuMobileValue = value;
     }
   },
 })
