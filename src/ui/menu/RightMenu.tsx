@@ -67,6 +67,14 @@ type props = {
   showMenuBar: boolean;
 };
 
+export const checkMenuTrue = (item: menuItem, pathname: string) => {
+  if (item.subset?.some((s) => pathname == s.path)) {
+    return true;
+  } else if (item.path == pathname) {
+    return true;
+  }
+};
+
 const RightMenu = ({ showMenuBar }: props) => {
   const { pathname } = useLocation();
 
@@ -74,14 +82,6 @@ const RightMenu = ({ showMenuBar }: props) => {
     (state: RootState) => state.menuHeader,
   );
   const dispatch = useDispatch();
-
-  const checkMenuTrue = (item: menuItem) => {
-    if (item.subset?.some((s) => pathname == s.path)) {
-      return true;
-    } else if (item.path == pathname) {
-      return true;
-    }
-  };
 
   return (
     <>
@@ -156,14 +156,16 @@ const RightMenu = ({ showMenuBar }: props) => {
                 </div>
                 <div
                   className={`duration-200 ease-in-out text-secondary-500 ${
-                    checkMenuTrue(item) == true ? "-rotate-90" : "rotate-0"
+                    checkMenuTrue(item, pathname) == true
+                      ? "-rotate-90"
+                      : "rotate-0"
                   } ${menuValue ? "visible" : "hidden"}`}>
                   <IoIosArrowBack />
                 </div>
               </Link>
               <div
                 className={`flex flex-col items-center justify-around  ${
-                  checkMenuTrue(item) == true
+                  checkMenuTrue(item, pathname) == true
                     ? "h-auto overflow-visible"
                     : "h-0 overflow-hidden"
                 } ${menuValue ? "" : "h-auto overflow-visible"}`}>
