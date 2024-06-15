@@ -11,7 +11,7 @@ const MainMenu = () => {
     <>
       <div
         className={`${menuValue ? "w-[20%]" : "w-[8.3%] min-w-[110px]"} ${
-          hideMenuValue ? "!w-[0%] min-w-[0px]" : "w-1/5"
+          hideMenuValue ? "!w-[0%] !min-w-[0px]" : "w-1/5"
         } hidden lg:flex relative transition-all duration-300 ease-in-out h-ful bg-secondary-300 z-10 
          `}>
         <div
