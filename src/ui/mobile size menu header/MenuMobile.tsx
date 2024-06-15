@@ -71,7 +71,7 @@ const MenuMobile = () => {
         } lg:hidden h-screen bg-opacity-0 z-40`}></div>
       <div
         className={`${
-          menuMobileValue ? "w-72" : "w-0 px-0"
+          menuMobileValue ? "w-72" : "w-0 !px-0"
         } z-50 h-screen lg:hidden bg-secondary-100 overflow-hidden px-5 text-secondary-400 shadow-2xl transition-all ease-in-out duration-300 absolute`}>
         {menuItems.map((item) => (
           <>
