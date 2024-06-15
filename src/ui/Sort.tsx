@@ -2,32 +2,12 @@ import { FaSortAlphaDown } from "react-icons/fa";
 import { IoMdArrowDropdown } from "react-icons/io";
 import DropDown from "./DropDown";
 import { useState } from "react";
-import Slider from "@mui/material/Slider";
+import SortPriceSlider from "./SortPriceSlider";
 import { useSearchParams } from "react-router-dom";
-
-function valuetext(value: number) {
-  return `${value}°C`;
-}
 
 const Sort = () => {
   const [showDropDown, setShowDropDown] = useState(false);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [value, setValue] = useState<number[]>([
-    Number(searchParams.get("price_min")) || 0,
-    Number(searchParams.get("price_max")) || 1000,
-  ]);
-
-  const handleChange = (event: Event, newValue: number | number[]) => {
-    setValue(Array.isArray(newValue) ? newValue : [newValue]);
-    if (Array.isArray(newValue)) {
-      searchParams.set("price_min", newValue[0].toString());
-      searchParams.set("price_max", newValue[1].toString());
-    } else {
-      searchParams.set("price_min", newValue.toString());
-      searchParams.set("price_max", newValue.toString());
-    }
-    setSearchParams(searchParams);
-  };
+  const [searchParams] = useSearchParams();
 
   return (
     <div
@@ -38,24 +18,18 @@ const Sort = () => {
         <span>مرتب سازی</span>
         <FaSortAlphaDown className='mr-2' />
       </div>
-      <IoMdArrowDropdown className="lg:text-xs xl:text-xl rotate-0" />
+      <IoMdArrowDropdown className='lg:text-xs xl:text-xl rotate-0' />
       <DropDown show={showDropDown}>
         <div className='w-full h-full p-5'>
           <div className='flex items-center justify-between'>
             <span>قیمت</span>
             <p>
-              شروع از {value[0]} تا {value[1]}
+              شروع از {searchParams.get("price_min")} تا{" "}
+              {searchParams.get("price_max")}
             </p>
           </div>
-          <Slider
-            getAriaLabel={() => "Temperature range"}
-            value={value}
-            onChange={handleChange}
-            valueLabelDisplay='auto'
-            getAriaValueText={valuetext}
-            min={1}
-            max={1000}
-          />
+          {/* slider price */}
+          <SortPriceSlider />
           <div className='w-full flex items-center justify-between'>
             <span>بیشترین</span>
             <span>کمترین</span>

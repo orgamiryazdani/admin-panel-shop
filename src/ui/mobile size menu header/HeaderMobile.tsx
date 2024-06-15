@@ -10,33 +10,13 @@ import Modal from "../Modal";
 import useCategories from "../../hooks/useCategories";
 import Loading from "../Loading";
 import { useState } from "react";
-import { Slider } from "@mui/material";
-
-function valuetext(value: number) {
-  return `${value}°C`;
-}
+import SortPriceSlider from "../SortPriceSlider";
 
 const HeaderMobile = () => {
   const dispatch = useDispatch();
   const [showModalFilter, setShowModalFilter] = useState(false);
   const { data, isLoading } = useCategories();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [value, setValue] = useState<number[]>([
-    Number(searchParams.get("price_min")) || 0,
-    Number(searchParams.get("price_max")) || 1000,
-  ]);
-
-  const handleChange = (event: Event, newValue: number | number[]) => {
-    setValue(Array.isArray(newValue) ? newValue : [newValue]);
-    if (Array.isArray(newValue)) {
-      searchParams.set("price_min", newValue[0].toString());
-      searchParams.set("price_max", newValue[1].toString());
-    } else {
-      searchParams.set("price_min", newValue.toString());
-      searchParams.set("price_max", newValue.toString());
-    }
-    setSearchParams(searchParams);
-  };
+  const [searchParams] = useSearchParams();
 
   return (
     <div className='w-screen md:h-[12%] h-auto flex flex-col md:flex-row items-center justify-between md:px-5 px-2 lg:hidden py-2 md:py-0'>
@@ -98,21 +78,14 @@ const HeaderMobile = () => {
           </select>
           <div className='w-full flex items-center justify-between px-1 pt-5 border-t'>
             <span>بیشترین</span>
-            <span>
-              شروع قیمت از {value[0]} تا {value[1]}
-            </span>
+            <p>
+              شروع از {searchParams.get("price_min")} تا{" "}
+              {searchParams.get("price_max")}
+            </p>
             <span>کمترین</span>
           </div>
           <div className='px-3'>
-            <Slider
-              getAriaLabel={() => "Temperature range"}
-              value={value}
-              onChange={handleChange}
-              valueLabelDisplay='auto'
-              getAriaValueText={valuetext}
-              min={1}
-              max={1000}
-            />
+            <SortPriceSlider />
           </div>
         </Modal>
       </div>

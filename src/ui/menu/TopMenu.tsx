@@ -23,16 +23,12 @@ import { useEffect, useState } from "react";
 import Modal from "../Modal";
 import useCategories from "../../hooks/useCategories";
 import { useSearchParams } from "react-router-dom";
-import { Slider } from "@mui/material";
 import Loading from "../Loading";
+import SortPriceSlider from "../SortPriceSlider";
 
 type props = {
   showMenuBar: boolean;
 };
-
-function valuetext(value: number) {
-  return `${value}°C`;
-}
 
 const TopMenu = ({ showMenuBar }: props) => {
   const { menuValue, hideMenuValue, changeMenuHeaderUi } = useSelector(
@@ -45,23 +41,6 @@ const TopMenu = ({ showMenuBar }: props) => {
 
   const { data, isLoading } = useCategories();
   const [searchParams, setSearchParams] = useSearchParams();
-
-  const [value, setValue] = useState<number[]>([
-    Number(searchParams.get("price_min")) || 0,
-    Number(searchParams.get("price_max")) || 1000,
-  ]);
-
-  const handleChange = (event: Event, newValue: number | number[]) => {
-    setValue(Array.isArray(newValue) ? newValue : [newValue]);
-    if (Array.isArray(newValue)) {
-      searchParams.set("price_min", newValue[0].toString());
-      searchParams.set("price_max", newValue[1].toString());
-    } else {
-      searchParams.set("price_min", newValue.toString());
-      searchParams.set("price_max", newValue.toString());
-    }
-    setSearchParams(searchParams);
-  };
 
   function filterHandler(id: number) {
     searchParams.set("categoryId", id.toString());
@@ -84,20 +63,13 @@ const TopMenu = ({ showMenuBar }: props) => {
         <div className='w-full flex items-center justify-between px-1'>
           <span>بیشترین</span>
           <span>
-            شروع قیمت از {value[0]} تا {value[1]}
+            شروع قیمت از {searchParams.get("price_min")} تا{" "}
+            {searchParams.get("price_max")}
           </span>
           <span>کمترین</span>
         </div>
         <div className='px-3'>
-          <Slider
-            getAriaLabel={() => "Temperature range"}
-            value={value}
-            onChange={handleChange}
-            valueLabelDisplay='auto'
-            getAriaValueText={valuetext}
-            min={1}
-            max={1000}
-          />
+          <SortPriceSlider />
         </div>
       </Modal>
       {/* filter modal */}
