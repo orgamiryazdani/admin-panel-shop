@@ -62,7 +62,7 @@ const HeaderMobile = () => {
           title='فیلتر و سرت بر اساس دسته بندی و قیمت'
           open={showModalFilter}
           onClose={() => setShowModalFilter(false)}>
-          <select className='w-full bg-secondary-200 p-2 rounded-xl mb-5'>
+          <select className='w-full bg-secondary-200 p-2 rounded-xl mb-5 cursor-pointer'>
             <option value=''>همه محصولات</option>
             {isLoading ? (
               <Loading />

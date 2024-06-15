@@ -47,6 +47,11 @@ const TopMenu = ({ showMenuBar }: props) => {
     setSearchParams(searchParams);
   }
 
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    searchParams.set("title", e.target.value);
+    setSearchParams(searchParams);
+  };
+
   useEffect(() => {
     if (changeMenuHeaderUi == false) {
       setShowSearch(false);
@@ -78,7 +83,7 @@ const TopMenu = ({ showMenuBar }: props) => {
         onClose={() => setShowModalFilter(false)}
         title='فیلتر بر اساس دسته بندی'>
         <select
-          className='w-full h-11 rounded-xl px-2'
+          className='w-full h-11 rounded-xl px-2 bg-secondary-200 cursor-pointer'
           name=''
           id=''
           onChange={(e) => filterHandler(Number(e.target.value))}>
@@ -160,7 +165,8 @@ const TopMenu = ({ showMenuBar }: props) => {
                 <input
                   type='search'
                   placeholder='جستجو...'
-                  className={`transition-all ease-in-out duration-300 h-10 rounded-l-xl bg-secondary-200 absolute right-12 z-50 shadow-2xl shadow-gray-400 ${
+                  onChange={(e) => handleSearch(e)}
+                  className={`transition-all ease-in-out duration-300 text-base h-10 rounded-l-xl bg-secondary-200 absolute right-12 z-50 shadow-2xl shadow-gray-400 ${
                     showSearch && !menuValue ? "w-56 px-3" : "w-0"
                   }
                 ${menuValue && !changeMenuHeaderUi && "hidden"}
