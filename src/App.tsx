@@ -3,6 +3,7 @@ import AppLayout from "./ui/AppLayout";
 import { Provider } from "react-redux";
 import { store } from "./store";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Products from "./pages/Products";
 
 const queryClient = new QueryClient();
 
@@ -13,13 +14,12 @@ function App() {
         <Routes>
           <Route
             path='/'
-            element={<AppLayout />}
+            element={<Products />}
           />
           <Route
             path='/add-product'
             element={<AppLayout />}
           />
-
           <Route
             path='/category'
             element={<AppLayout />}

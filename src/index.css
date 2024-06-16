@@ -54,6 +54,26 @@ body {
   overflow: hidden;
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 @layer components {
   .textField__input {
     @apply w-full py-3 px-4 rounded-xl text-secondary-300 border border-secondary-100 bg-white hover:border-primary-100 focus:border-primary-100 transition-all duration-300 ease-out focus:shadow-lg focus:shadow-secondary-600 dark:focus:shadow-secondary-600;
@@ -71,22 +91,18 @@ body {
   }
   51% {
     width: 0%;
-    background-color: red;
   }
   100% {
     width: 100%;
-    background-color: red;
   }
 }
 
 @keyframes settingAnimateHeight {
   0% {
     height: 100%;
-    background-color: red;
   }
   50% {
     height: 0%;
-    background-color: red;
   }
   51% {
     height: 0%;
