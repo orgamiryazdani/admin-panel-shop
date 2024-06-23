@@ -5,6 +5,8 @@ import { useState } from "react";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import Modal from "./Modal";
 import { product } from "../types/Product";
+import { useDeleteProduct } from "../hooks/useProducts";
+import { Bars } from "react-loader-spinner";
 
 type props = { product: product };
 
@@ -17,6 +19,28 @@ const ProductCart = ({ product }: props) => {
   );
   const [showInputEdit, setShowInputEdi] = useState<number | null>(null);
   const [showModalDelete, setShowModalDelete] = useState(false);
+
+  const { mutate, isPending } = useDeleteProduct(id);
+
+  const deleteProduct = (id: number) => {
+    mutate(id);
+    setShowModalDelete(false);
+  };
+
+  if (isPending)
+    return (
+      <div className='backdrop-blur-sm fixed top-0 left-0 w-full h-screen bg-opacity-0 z-50 flex items-center justify-center'>
+        <Bars
+          height='80'
+          width='80'
+          color='#4fa94d'
+          ariaLabel='bars-loading'
+          wrapperStyle={{}}
+          wrapperClass=''
+          visible={true}
+        />
+      </div>
+    );
 
   return (
     <div
@@ -55,7 +79,9 @@ const ProductCart = ({ product }: props) => {
             open={showModalDelete}
             title='آیا از حذف این محصول مطمعن هستید؟'>
             <div className='w-full flex items-center justify-between text-secondary-100'>
-              <button className='w-[48%] h-11 rounded-xl bg-secondary-700'>
+              <button
+                onClick={() => deleteProduct(id)}
+                className='w-[48%] h-11 rounded-xl bg-secondary-700'>
                 بله !
               </button>
               <button
