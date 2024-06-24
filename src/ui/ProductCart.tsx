@@ -5,8 +5,9 @@ import { useState } from "react";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import Modal from "./Modal";
 import { product } from "../types/Product";
-import { useDeleteProduct } from "../hooks/useProducts";
+import { useDeleteProduct, useUpdateProduct } from "../hooks/useProducts";
 import { Bars } from "react-loader-spinner";
+import toast from "react-hot-toast";
 
 type props = { product: product };
 
@@ -19,15 +20,31 @@ const ProductCart = ({ product }: props) => {
   );
   const [showInputEdit, setShowInputEdi] = useState<number | null>(null);
   const [showModalDelete, setShowModalDelete] = useState(false);
+  const [updateProductValue, setUpdateProductValue] = useState({
+    title: "",
+    price: 0,
+  });
 
-  const { mutate, isPending } = useDeleteProduct(id);
+  const { mutate: DeleteProduct, isPending: deleteProductLoading } =
+    useDeleteProduct(id);
+  const { mutate: UpdateProduct, isPending: updateProductLoading } =
+    useUpdateProduct(id, updateProductValue.title, updateProductValue.price);
 
   const deleteProduct = (id: number) => {
-    mutate(id);
+    DeleteProduct(id);
     setShowModalDelete(false);
   };
 
-  if (isPending)
+  const updateProduct = (id: number) => {
+    if (updateProductValue.title == "" || updateProductValue.price == 0) {
+      toast.error("لطفا مقدار جدیدی وارد کنید");
+      return;
+    }
+    UpdateProduct(id);
+    setShowInputEdi(false);
+  };
+
+  if (deleteProductLoading || updateProductLoading)
     return (
       <div className='backdrop-blur-sm fixed top-0 left-0 w-full h-screen bg-opacity-0 z-50 flex items-center justify-center'>
         <Bars
@@ -112,17 +129,37 @@ const ProductCart = ({ product }: props) => {
         <div className='flex items-center justify-between pr-1'>
           <input
             type='text'
-            value={showInputEdit ? title : truncateText(title, 30)}
+            name='title'
+            onChange={(e) =>
+              setUpdateProductValue({
+                ...updateProductValue,
+                [e.target.name]: e.target.value,
+              })
+            }
+            defaultValue={showInputEdit ? title : truncateText(title, 30)}
             readOnly={showInputEdit !== id}
             className={`w-[85%] font-semibold ${
-              showInputEdit == id
-                ? "border border-blue-500 rounded-lg px-2 h-8 mb-2"
-                : ""
+              showInputEdit == id ? "border-b border-black px-2 h-8 mb-2" : ""
             }`}
             autoFocus={showInputEdit === id}
             key={showInputEdit === id ? "focused" : "unfocused"}
           />
-          <span className='text-sm text-green-600'>$ {price}</span>
+          $
+          <input
+            type='number'
+            name='price'
+            onChange={(e) =>
+              setUpdateProductValue({
+                ...updateProductValue,
+                [e.target.name]: e.target.value,
+              })
+            }
+            defaultValue={price}
+            readOnly={showInputEdit !== id}
+            className={`w-[13%] font-semibold ${
+              showInputEdit == id ? "border-b border-black h-8 mb-2" : ""
+            }`}
+          />
         </div>
         <textarea
           readOnly={showInputEdit !== id}
@@ -147,7 +184,9 @@ const ProductCart = ({ product }: props) => {
               className='w-[48%] h-11 rounded-xl bg-red-500'>
               لغو
             </button>
-            <button className='w-[48%] h-11 rounded-xl bg-secondary-700'>
+            <button
+              onClick={() => updateProduct(id)}
+              className='w-[48%] h-11 rounded-xl bg-secondary-700'>
               ذخیره
             </button>
           </div>
