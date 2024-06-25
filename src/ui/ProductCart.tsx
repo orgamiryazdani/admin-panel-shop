@@ -7,7 +7,6 @@ import Modal from "./Modal";
 import { product } from "../types/Product";
 import { useDeleteProduct, useUpdateProduct } from "../hooks/useProducts";
 import { Bars } from "react-loader-spinner";
-import toast from "react-hot-toast";
 
 type props = { product: product };
 
@@ -35,13 +34,13 @@ const ProductCart = ({ product }: props) => {
     setShowModalDelete(false);
   };
 
-  const updateProduct = (id: number) => {
-    if (updateProductValue.title == "" || updateProductValue.price == 0) {
-      toast.error("لطفا مقدار جدیدی وارد کنید");
-      return;
-    }
+  const updateProduct = (id: number, title: string, price: number) => {
+    setUpdateProductValue({
+      title: updateProductValue.title == "" ? title : updateProductValue.title,
+      price: updateProductValue.price == 0 ? price : updateProductValue.price,
+    });
     UpdateProduct(id);
-    setShowInputEdi(false);
+    setShowInputEdi(null);
   };
 
   if (deleteProductLoading || updateProductLoading)
@@ -126,7 +125,7 @@ const ProductCart = ({ product }: props) => {
       <div
         dir='ltr'
         className='flex flex-col pt-2 pl-3 pr-3'>
-        <div className='flex items-center justify-between pr-1'>
+        <div className='flex items-center justify-between pr-1 overflow-hidden'>
           <input
             type='text'
             name='title'
@@ -138,41 +137,43 @@ const ProductCart = ({ product }: props) => {
             }
             defaultValue={showInputEdit ? title : truncateText(title, 30)}
             readOnly={showInputEdit !== id}
-            className={`w-[85%] font-semibold ${
+            className={`w-[89%] font-semibold ${
               showInputEdit == id ? "border-b border-black px-2 h-8 mb-2" : ""
             }`}
             autoFocus={showInputEdit === id}
             key={showInputEdit === id ? "focused" : "unfocused"}
           />
-          $
-          <input
-            type='number'
-            name='price'
-            onChange={(e) =>
-              setUpdateProductValue({
-                ...updateProductValue,
-                [e.target.name]: e.target.value,
-              })
-            }
-            defaultValue={price}
-            readOnly={showInputEdit !== id}
-            className={`w-[13%] font-semibold ${
-              showInputEdit == id ? "border-b border-black h-8 mb-2" : ""
-            }`}
-          />
+          {/* price */}
+          <div className={`text-sm text-green-500 gap-x-[2px] w-[11%] flex items-center justify-start ${showInputEdit === id ? "mb-2" : "mb-0"}`}>
+            $
+            <input
+              type='number'
+              name='price'
+              onChange={(e) =>
+                setUpdateProductValue({
+                  ...updateProductValue,
+                  [e.target.name]: e.target.value,
+                })
+              }
+              defaultValue={price}
+              readOnly={showInputEdit !== id}
+              className={
+                showInputEdit == id ? "border-b border-black h-8 pl-[1px]" : ""
+              }
+            />
+          </div>
         </div>
-        <textarea
-          readOnly={showInputEdit !== id}
-          className={` text-xs pr-1 h-9 overflow-hidden ${
+        {/* description */}
+        <p
+          className={`text-xs pr-1 h-9 transition-all duration-200 ease-in-out ${
             showInputEdit === id
-              ? "border border-blue-500 !overflow-auto rounded-lg px-2 mb-2 min-h-[85px] p-1"
+              ? "mb-2 h-[85px] p-1 px-2 !overflow-auto"
               : showMoreDesc === id
-              ? "min-h-[85px] !overflow-auto"
+              ? "h-[85px] !overflow-auto"
               : ""
-          }`}
-          value={
-            showMoreDesc === id ? description : truncateText(description, 100)
-          }></textarea>
+          }`}>
+          {showMoreDesc === id ? description : truncateText(description, 100)}
+        </p>
         {/* button edit */}
         {showInputEdit === id ? (
           <div className='w-full flex items-center justify-between text-secondary-100 my-2'>
@@ -185,7 +186,10 @@ const ProductCart = ({ product }: props) => {
               لغو
             </button>
             <button
-              onClick={() => updateProduct(id)}
+              onClick={() => {
+                updateProduct(id, title, price);
+                setShowMoreDesc(null);
+              }}
               className='w-[48%] h-11 rounded-xl bg-secondary-700'>
               ذخیره
             </button>
