@@ -165,7 +165,7 @@ const ProductCart = ({ product }: props) => {
         </div>
         {/* description */}
         <p
-          className={`text-xs pr-1 h-9 transition-all duration-200 ease-in-out ${
+          className={`md:text-xs text-[10px] pr-1 h-9 overflow-hidden transition-all duration-200 ease-in-out ${
             showInputEdit === id
               ? "mb-2 h-[85px] p-1 px-2 !overflow-auto"
               : showMoreDesc === id
