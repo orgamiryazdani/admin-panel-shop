@@ -158,7 +158,7 @@ const ProductCart = ({ product }: props) => {
               defaultValue={price}
               readOnly={showInputEdit !== id}
               className={
-                showInputEdit == id ? "border-b border-black h-8 pl-[1px]" : ""
+                showInputEdit == id ? "border-b border-black h-8 pl-[2px]" : ""
               }
             />
           </div>
@@ -182,7 +182,7 @@ const ProductCart = ({ product }: props) => {
                 setShowInputEdi(null);
                 setShowMoreDesc(null);
               }}
-              className='w-[48%] h-11 rounded-xl bg-red-500'>
+              className='w-[48.5%] h-10 rounded-md bg-secondary-800'>
               لغو
             </button>
             <button
@@ -190,7 +190,7 @@ const ProductCart = ({ product }: props) => {
                 updateProduct(id, title, price);
                 setShowMoreDesc(null);
               }}
-              className='w-[48%] h-11 rounded-xl bg-secondary-700'>
+              className='w-[48.5%] h-10 rounded-md bg-secondary-600'>
               ذخیره
             </button>
           </div>
