@@ -144,7 +144,10 @@ const ProductCart = ({ product }: props) => {
             key={showInputEdit === id ? "focused" : "unfocused"}
           />
           {/* price */}
-          <div className={`text-sm text-green-500 gap-x-[2px] w-[11%] flex items-center justify-start ${showInputEdit === id ? "mb-2" : "mb-0"}`}>
+          <div
+            className={`text-sm text-green-500 gap-x-[2px] w-[11%] flex items-center justify-start ${
+              showInputEdit === id ? "mb-2" : "mb-0"
+            }`}>
             $
             <input
               type='number'
