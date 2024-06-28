@@ -1,12 +1,13 @@
 import { MdDelete, MdEdit } from "react-icons/md";
 import truncateText from "../utils/truncateText";
 import { IoIosArrowUp } from "react-icons/io";
-import { useState } from "react";
+import { RefObject, useState } from "react";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import Modal from "./Modal";
 import { product } from "../types/Product";
 import { useDeleteProduct, useUpdateProduct } from "../hooks/useProducts";
 import { Bars } from "react-loader-spinner";
+import useOutsideClick from "../hooks/useOutsideClick";
 
 type props = { product: product };
 
@@ -43,6 +44,12 @@ const ProductCart = ({ product }: props) => {
     setShowInputEdi(null);
   };
 
+  const closeOptionProduct = () => {
+    setShowaOptionProduct(null);
+  };
+
+  const ref = useOutsideClick(closeOptionProduct);
+
   if (deleteProductLoading || updateProductLoading)
     return (
       <div className='backdrop-blur-sm fixed top-0 left-0 w-full h-screen bg-opacity-0 z-50 flex items-center justify-center'>
@@ -65,11 +72,11 @@ const ProductCart = ({ product }: props) => {
       } rounded-xl shadow-sm bg-secondary-100 overflow-hidden`}>
       {/* option products */}
       <div
-        onClick={() => setShowaOptionProduct(null)}
         className={`w-full ${
           showOptionProduct ? "h-full" : "h-0"
         } absolute bg-opacity-50 bg-slate-400`}>
         <div
+          ref={ref as RefObject<HTMLDivElement>}
           className={`absolute bottom-0 z-50 w-full bg-secondary-200 ${
             showOptionProduct ? "h-[110px]" : "h-0"
           } overflow-hidden transition-all duration-300 ease-in-out rounded-t-xl px-4`}>
@@ -80,6 +87,7 @@ const ProductCart = ({ product }: props) => {
             onClick={() => {
               setShowInputEdi(id);
               setShowMoreDesc(id);
+              setShowaOptionProduct(null);
             }}
             className='flex items-center w-fit cursor-pointer gap-2 text-sm mt-4'>
             <MdEdit className='text-base ' /> ویرایش محصول

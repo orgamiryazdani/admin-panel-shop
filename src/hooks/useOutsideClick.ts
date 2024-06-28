@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
 
 export default function useOutsideClick(
-  handler: () => void,
-  listenCapturing: boolean = true
+    handler: () => void,
+    listenCapturing: boolean = true
 ): React.RefObject<HTMLElement> {
     const ref = useRef<HTMLElement>(null);
 
@@ -13,7 +13,7 @@ export default function useOutsideClick(
             }
         }
         document.addEventListener("click", handleClick, listenCapturing);
-        
+
         return () => document.removeEventListener("click", handleClick, listenCapturing);
     }, [handler, listenCapturing]);
     return ref;
