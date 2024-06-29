@@ -78,6 +78,9 @@ body {
   .textField__input {
     @apply w-full py-3 px-4 rounded-xl text-secondary-300 border border-secondary-100 bg-white hover:border-primary-100 focus:border-primary-100 transition-all duration-300 ease-out focus:shadow-lg focus:shadow-secondary-600 dark:focus:shadow-secondary-600;
   }
+  .input {
+    @apply w-full py-3 px-4 rounded-xl bg-gray-200 hover:border-secondary-700 focus:border-secondary-700 transition-all duration-300 ease-out focus:shadow-md focus:shadow-secondary-400 dark:focus:shadow-secondary-700;
+  }
 }
 
 @keyframes settingAnimateWidth {

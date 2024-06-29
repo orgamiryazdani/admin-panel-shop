@@ -5,6 +5,7 @@ import { store } from "./store";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Products from "./pages/Products";
 import { Toaster } from "react-hot-toast";
+import CreateProduct from "./pages/CreateProduct";
 
 export const queryClient = new QueryClient();
 
@@ -20,7 +21,7 @@ function App() {
           />
           <Route
             path='/add-product'
-            element={<AppLayout />}
+            element={<CreateProduct />}
           />
           <Route
             path='/category'
