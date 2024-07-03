@@ -20,7 +20,7 @@ const Input: React.FC<InputProps> = ({
         placeholder={placeholder}
       />
       {errors && errors[name] && (
-        <span className='text-error block text-sm mt-3'>
+        <span className='text-red-500 block text-sm mt-1'>
           {errors[name]?.message as React.ReactNode}
         </span>
       )}
