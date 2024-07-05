@@ -1,4 +1,4 @@
-import { UseFormRegister, FieldValues, FieldErrors, RegisterOptions } from "react-hook-form";
+import { UseFormRegister, RegisterOptions } from "react-hook-form";
 
 export interface ApiError {
     response?: {
@@ -8,14 +8,21 @@ export interface ApiError {
     };
 }
 
+export interface FormData {
+    title: string;
+    price: number;
+    description: string;
+    categoryId: string;
+  }
+
 export interface InputProps {
     type?: string;
-    name: string;
-    register: UseFormRegister<FieldValues>;
+    name: keyof FormData;
+    register: UseFormRegister<FormData>; // تایپ‌گذاری register با UseFormRegister<FormData>
     validationSchema: RegisterOptions;
-    errors?: FieldErrors<FieldValues>;
+    errors?: Record<keyof FormData, { message: string }>; // تایپ‌گذاری errors با Record<keyof FormData, { message: string }>
     placeholder: string;
-}
+  }
 
 export interface CreateProduct {
     title: string;

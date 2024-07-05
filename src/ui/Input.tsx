@@ -1,3 +1,4 @@
+import React from "react";
 import { InputProps } from "../types/globalTypes";
 
 const Input: React.FC<InputProps> = ({
@@ -15,7 +16,6 @@ const Input: React.FC<InputProps> = ({
         id={name}
         className='input'
         type={type}
-        name={name}
         autoComplete='off'
         placeholder={placeholder}
       />

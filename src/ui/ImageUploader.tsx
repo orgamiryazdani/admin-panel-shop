@@ -52,10 +52,10 @@ const ImageUploader: React.FC = () => {
       {!selectedImage && (
         <button
           onClick={handleClick}
-          className='w-full h-full text-2xl border border-dashed border-secondary-500 rounded-xl flex items-center justify-center gap-2'
+          className='w-full h-full md:text-2xl text-xs border border-dashed border-secondary-500 rounded-xl flex flex-col md:flex-row items-center justify-center gap-2'
         >
           عکس خود را انتخاب کنید یا فایل را اینجا بکشید و رها کنید
-          <AiOutlineCloudUpload />
+          <AiOutlineCloudUpload className="w-6 h-6 mt-2 md:mt-0"/>
         </button>
       )}
       {selectedImage && (

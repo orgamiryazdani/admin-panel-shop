@@ -1,7 +1,8 @@
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import AppLayout from "../ui/AppLayout";
 import ImageUploader from "../ui/ImageUploader";
 import Input from "../ui/Input";
+import { FormData } from "../types/globalTypes";
 
 const CreateProduct = () => {
   const {
@@ -9,22 +10,22 @@ const CreateProduct = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm();
+  } = useForm<FormData>(); // تایپ‌گذاری useForm با FormData
 
-  const onSubmit = (data) => {
+  const onSubmit: SubmitHandler<FormData> = (data) => {
     console.log(data);
     reset();
   };
 
   return (
     <AppLayout>
-      <div className='w-full h-full overflow-auto p-10'>
+      <div className='w-full h-full overflow-auto md:p-10 p-5'>
         {/* image product uploader */}
         <ImageUploader />
         {/* info product input */}
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className='grid w-full min-h-[40%] h-auto mt-4 bg-secondary-100 rounded-xl grid-cols-2 grid-rows-3 gap-4 p-2'>
+          className='md:grid flex flex-col w-full min-h-[40%] h-auto mt-4 bg-secondary-100 rounded-xl grid-cols-2 grid-rows-3 gap-4 p-2'>
           <Input
             placeholder='عنوان محصول'
             name='title'
@@ -65,7 +66,9 @@ const CreateProduct = () => {
               })}></textarea>
             {errors && errors["description"] && (
               <span className='text-red-500 block text-sm mt-1'>
-                {errors["description"]?.message}
+                {typeof errors["description"]?.message === "string"
+                  ? errors["description"]?.message
+                  : ""}
               </span>
             )}
           </div>
@@ -75,18 +78,20 @@ const CreateProduct = () => {
                 required: "پر کردن این مقدار الزامی است",
               })}
               name='categoryId'
-              className='input max-h-14'
+              className='input max-h-14 text-xs md:text-base'
               value={""}
               id='categoryId'>
-              <option value='1'>دسته بندی مورد نظر خود را انتخاب کنید</option>
+              <option value=''>دسته بندی مورد نظر خود را انتخاب کنید</option>
             </select>
             {errors && errors["categoryId"] && (
               <span className='text-red-500 block text-sm mt-1'>
-                {errors["categoryId"]?.message}
+                {typeof errors["categoryId"]?.message === "string"
+                  ? errors["categoryId"]?.message
+                  : ""}
               </span>
             )}
           </div>
-          <button className='bg-secondary-600 text-white rounded-2xl max-h-14'>
+          <button className='bg-secondary-600 text-white rounded-2xl max-h-14 min-h-14'>
             ایجاد محصول جدید
           </button>
         </form>
